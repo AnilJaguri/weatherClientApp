@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "weatherapp",
+      "type": "com.performio.weatherclient.utils.VaultServerConfiguration",
+      "sourceType": "com.performio.weatherclient.utils.VaultServerConfiguration"
+    }
+  ],
+  "properties": [
+    {
+      "name": "weatherapp.api-key",
+      "type": "java.lang.String",
+      "sourceType": "com.performio.weatherclient.utils.VaultServerConfiguration"
+    },
+    {
+      "name": "weatherapp.user-name",
+      "type": "java.lang.String",
+      "sourceType": "com.performio.weatherclient.utils.VaultServerConfiguration"
+    }
+  ],
+  "hints": []
+}
