@@ -8,6 +8,7 @@ import java.net.URI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -33,7 +34,10 @@ public class WeatherServiceImpl implements WeatherService,CommandLineRunner {
 	WeatherResponseMapper mapper;
 	private VaultServerConfiguration vaultConfig;
 	private final RestTemplate restTemplate;
-
+	
+	// Need to comment if the keyvalut is setup on client machine
+	@Value("${api.openweathermap.key}")
+	private String apiKey;
 	private static final String WEATHER_URL = "http://api.openweathermap.org/data/2.5/weather?q={cityName}&APPID={key}";
 
 	/**
@@ -49,7 +53,8 @@ public class WeatherServiceImpl implements WeatherService,CommandLineRunner {
 	public CityWeather getCityWeather(String cityName) throws Exception {
 		ResponseEntity<String> response = null;
 		try {
-			 final String apiKey=vaultConfig.getApiKey();
+			// Need to uncomment if the keyvalut is setup on client machine and read key from vault
+			//final String apiKey=vaultConfig.getApiKey();
 			URI url = new UriTemplate(WEATHER_URL).expand(cityName, apiKey);
 			response = restTemplate.getForEntity(url, String.class);
 			if (response != null && response.getStatusCode().toString().equalsIgnoreCase("200 OK")) {
